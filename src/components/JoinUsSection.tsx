@@ -221,7 +221,7 @@ export function JoinUsSection() {
             {formMessage && (
               <p
                 className={`
-                  mt-6 text-base font-medium
+                  mt-6 text-base font-medium px-4 py-3 rounded-lg border
                   ${
                     isSuccess
                       ? "text-white bg-green-500/10 border-green-500"
