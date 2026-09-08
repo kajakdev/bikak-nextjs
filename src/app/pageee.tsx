@@ -1,9 +1,20 @@
 import Image from "next/image";
+import { VisionSocialSection } from "@/components/VisionSocialSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex flex-col flex-1 items-center justify-center">
+      <div className="flex flex-1 w-full flex-col items-center justify-between pb-32 sm:items-start">
+        <VisionSocialSection
+          visionTitle="Víziónk"
+          visionText="Az ország legjobb bikája, a Szigeti Bikák!"
+          visionImageSrc="/images/vision.jpg"
+          visionImageAlt="Szigeti Bikák"
+          visionHref="/vision"
+          visionBtnLabel="A Bikák víziója"
+          facebookHref="https://www.facebook.com/szigetibikak"
+          instagramHref="https://www.instagram.com/szigetibikak"
+        />
         <Image
           className="dark:invert h-5 w-[100px]"
           src="/next.svg"
@@ -63,7 +74,7 @@ export default function Home() {
             Documentation
           </a>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

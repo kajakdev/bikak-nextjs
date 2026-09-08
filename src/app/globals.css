@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #08002B;
+  --foreground: #182752;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-red: #E20613;
+  --color-red-dark: #CF1423;
+  --font-primary: var(--font-saira);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #08002B;
+    --foreground: #182752;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+
+@utility heading-page {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@utility heading-section {
+  font-family: var(--font-primary);
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@utility button-primary {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: white;
+  background-color: var(--color-red);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 1.25rem 0;
+  &:hover {
+    background-color: var(--color-red-dark);
+  }
+}
+
+@utility section-block {
+  background-color: var(--color-foreground);
+  border-radius: 1rem;
+  .section-block--text {
+    padding: 3rem 2rem;
+  }
+}
+
+@utility section-hero {
+  background-image: url("/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 3rem;
+    }
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary) !important;
+  font-size: 14px;
+  font-weight: 400;
 }
