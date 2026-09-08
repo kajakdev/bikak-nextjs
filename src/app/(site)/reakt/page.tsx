@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Reakt",
+};
+
 import { EvaluationPillarsSection } from "@/components/EvaluationPillarsSection";
 import { FeatureGridSection } from "@/components/FeatureGridSection";
 import { MonthlyProcessSection } from "@/components/MonthlyProcessSection";

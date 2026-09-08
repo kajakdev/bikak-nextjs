@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Korisuli",
+};
+
 import { Hero } from "@/components/Hero";
 import { JourneyTimelineSection } from "@/components/JourneyTimelineSection";
 import { SectionCard } from "@/components/SectionCard";

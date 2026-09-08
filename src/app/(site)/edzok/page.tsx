@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edzők",
+};
+
 import { Hero } from "@/components/Hero";
 import { CoachesGridSection } from "@/components/CoachesGridSection";
 

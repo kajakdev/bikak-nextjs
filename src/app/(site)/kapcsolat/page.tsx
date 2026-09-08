@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kapcsolat",
+};
+
 import { Hero } from "@/components/Hero";
 import { JoinUsSection } from "@/components/JoinUsSection";
 import { LocationSection } from "@/components/LocationSection";

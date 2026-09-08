@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "Rólunk", href: "/rolunk" },
@@ -16,6 +17,11 @@ const navItems = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <header className="relative z-50 mt-7">
@@ -48,7 +54,19 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="whitespace-nowrap text-lg font-extrabold uppercase text-white transition-opacity hover:opacity-70"
+                className={`
+                  relative whitespace-nowrap
+                  text-lg font-extrabold uppercase text-white
+                  transition-opacity hover:opacity-70
+                  after:absolute after:-bottom-2 after:left-0
+                  after:h-[3px] after:bg-red
+                  after:transition-all after:duration-200
+                  ${
+                    isActive(item.href)
+                      ? "after:w-full"
+                      : "after:w-0 hover:after:w-full"
+                  }
+                `}
               >
                 {item.label}
               </Link>
@@ -127,7 +145,16 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="border-b border-white/20 py-4 text-xl font-extrabold uppercase text-white"
+                className={`
+                  border-b border-white/20 py-4
+                  text-xl font-extrabold uppercase
+                  transition-colors
+                  ${
+                    isActive(item.href)
+                      ? "text-red"
+                      : "text-white hover:text-red"
+                  }
+                `}
               >
                 {item.label}
               </Link>

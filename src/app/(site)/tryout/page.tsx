@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tryout",
+};
+
 import { Hero } from "@/components/Hero";
 import { TryoutFormSection } from "@/components/TryoutFormSection";
 

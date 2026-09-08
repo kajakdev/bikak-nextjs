@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Future is Now Program",
+};
+
 import { FeatureGridSection } from "@/components/FeatureGridSection";
 import { SecondaryHero } from "@/components/SecondaryHero";
 import { SectionCard } from "@/components/SectionCard";

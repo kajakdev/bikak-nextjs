@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rólunk",
+};
+
 import { Hero } from "@/components/Hero";
 import { SectionCard } from "@/components/SectionCard";
 

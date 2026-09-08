@@ -10,7 +10,10 @@ const saira = Saira_Semi_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Szigeti Bikák",
+  title: {
+    default: "Szigeti Bikák",
+    template: "Szigeti Bikák - %s",
+  },
   description:
     "Szigeti Bikák SE Pesterzsébet - Egyesületünk hivatalos weboldala",
 };
