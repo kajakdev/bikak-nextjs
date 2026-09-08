@@ -2,6 +2,12 @@
 
 import { Resend } from "resend";
 
+import {
+  markSubmissionEmailFailed,
+  markSubmissionEmailSent,
+  saveFormSubmission,
+} from "@/lib/form-submissions";
+
 const resend = new Resend(
   process.env.RESEND_API_KEY
 );
@@ -78,7 +84,7 @@ export async function sendTryoutForm(
     };
   }
 
-  // Required fields
+  // Kötelező mezők
   if (
     !name ||
     !birthDate ||
@@ -109,7 +115,7 @@ export async function sendTryoutForm(
     };
   }
 
-  // Hockey years
+  // Jégkorongos tapasztalat
   const years =
     Number(hockeyYears);
 
@@ -125,11 +131,9 @@ export async function sendTryoutForm(
     };
   }
 
-  // Birth date
+  // Születési dátum
   const parsedBirthDate =
-    new Date(
-      `${birthDate}T00:00:00`
-    );
+    new Date(`${birthDate}T00:00:00`);
 
   if (
     Number.isNaN(
@@ -167,9 +171,7 @@ export async function sendTryoutForm(
   if (eliteProspect) {
     try {
       const url =
-        new URL(
-          eliteProspect
-        );
+        new URL(eliteProspect);
 
       if (
         url.protocol !== "https:" &&
@@ -190,22 +192,50 @@ export async function sendTryoutForm(
     }
   }
 
-  // Resend
-  const { error } =
-    await resend.emails.send({
-      from:
-        "Szigeti Bikák weboldal <onboarding@resend.dev>",
+  // 1. Mentés adatbázisba
+  let submissionId: string;
 
-      to:
-        process.env
-          .CONTACT_EMAIL!,
+  try {
+    submissionId =
+      await saveFormSubmission({
+        formType: "tryout",
+        name,
+        email,
+        phone,
+        payload: {
+          birthDate,
+          ageGroup,
+          hockeyYears: years,
+          club,
+          eliteProspect:
+            eliteProspect || null,
+        },
+      });
+  } catch (error) {
+    console.error(
+      "Tryout database error:",
+      error
+    );
 
-      replyTo: email,
+    return {
+      success: false,
+      message:
+        "A jelentkezést jelenleg nem sikerült rögzíteni. Kérjük, próbáld újra később.",
+    };
+  }
 
-      subject:
-        `Új játékos jelentkezés - ${name}`,
-
-      text: `
+  // 2. Email küldés
+  try {
+    const { error } =
+      await resend.emails.send({
+        from:
+          "Szigeti Bikák weboldal <onboarding@resend.dev>",
+        to:
+          process.env.CONTACT_EMAIL!,
+        replyTo: email,
+        subject:
+          `Új játékos jelentkezés - ${name}`,
+        text: `
 Új játékos jelentkezés érkezett.
 
 Név:
@@ -231,25 +261,51 @@ ${email}
 
 Telefonszám:
 ${phone}
-      `.trim(),
-    });
+        `.trim(),
+      });
 
-  if (error) {
+    if (error) {
+      console.error(
+        "Resend error:",
+        error
+      );
+
+      await markSubmissionEmailFailed(
+        submissionId,
+        error
+      );
+
+      return {
+        success: true,
+        message:
+          "Köszönjük a jelentkezést! Rögzítettük, de az email értesítés jelenleg nem sikerült.",
+      };
+    }
+
+    await markSubmissionEmailSent(
+      submissionId
+    );
+
+    return {
+      success: true,
+      message:
+        "Köszönjük a jelentkezést!",
+    };
+  } catch (error) {
     console.error(
-      "Resend error:",
+      "Resend exception:",
+      error
+    );
+
+    await markSubmissionEmailFailed(
+      submissionId,
       error
     );
 
     return {
-      success: false,
+      success: true,
       message:
-        "A jelentkezést nem sikerült elküldeni. Kérjük, próbáld újra később.",
+        "Köszönjük a jelentkezést! Rögzítettük, de az email értesítés jelenleg nem sikerült.",
     };
   }
-
-  return {
-    success: true,
-    message:
-      "Köszönjük a jelentkezést!",
-  };
 }

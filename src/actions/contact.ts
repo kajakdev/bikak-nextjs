@@ -2,6 +2,12 @@
 
 import { Resend } from "resend";
 
+import {
+  markSubmissionEmailFailed,
+  markSubmissionEmailSent,
+  saveFormSubmission,
+} from "@/lib/form-submissions";
+
 const resend = new Resend(
   process.env.RESEND_API_KEY
 );
@@ -114,20 +120,45 @@ export async function sendContactForm(
     };
   }
 
-  const { error } =
-    await resend.emails.send({
-      from:
-        "Szigeti Bikák weboldal <onboarding@resend.dev>",
+  // 1. Mentés adatbázisba
+  let submissionId: string;
 
-      to:
-        process.env.CONTACT_EMAIL!,
+  try {
+    submissionId =
+      await saveFormSubmission({
+        formType: "contact",
+        name,
+        email,
+        phone,
+        payload: {
+          message,
+        },
+      });
+  } catch (error) {
+    console.error(
+      "Contact form database error:",
+      error
+    );
 
-      replyTo: email,
+    return {
+      success: false,
+      message:
+        "Az üzenetet jelenleg nem sikerült rögzíteni. Kérjük, próbáld újra később.",
+    };
+  }
 
-      subject:
-        `Új üzenet - ${name}`,
-
-      text: `
+  // 2. Email küldés
+  try {
+    const { error } =
+      await resend.emails.send({
+        from:
+          "Szigeti Bikák weboldal <onboarding@resend.dev>",
+        to:
+          process.env.CONTACT_EMAIL!,
+        replyTo: email,
+        subject:
+          `Új üzenet - ${name}`,
+        text: `
 Új üzenet érkezett a Szigeti Bikák weboldaláról.
 
 Név:
@@ -140,27 +171,52 @@ Email:
 ${email}
 
 Üzenet:
-
 ${message}
-      `.trim(),
-    });
+        `.trim(),
+      });
 
-  if (error) {
+    if (error) {
+      console.error(
+        "Resend error:",
+        error
+      );
+
+      await markSubmissionEmailFailed(
+        submissionId,
+        error
+      );
+
+      return {
+        success: true,
+        message:
+          "Köszönjük az üzenetet! Rögzítettük, de az email értesítés jelenleg nem sikerült.",
+      };
+    }
+
+    await markSubmissionEmailSent(
+      submissionId
+    );
+
+    return {
+      success: true,
+      message:
+        "Köszönjük az üzenetet!",
+    };
+  } catch (error) {
     console.error(
-      "Resend error:",
+      "Resend exception:",
+      error
+    );
+
+    await markSubmissionEmailFailed(
+      submissionId,
       error
     );
 
     return {
-      success: false,
+      success: true,
       message:
-        "Az üzenetet nem sikerült elküldeni. Kérjük, próbáld újra később.",
+        "Köszönjük az üzenetet! Rögzítettük, de az email értesítés jelenleg nem sikerült.",
     };
   }
-
-  return {
-    success: true,
-    message:
-      "Köszönjük az üzenetet!",
-  };
 }
