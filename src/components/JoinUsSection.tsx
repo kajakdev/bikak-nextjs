@@ -224,8 +224,8 @@ export function JoinUsSection() {
                   mt-6 text-base font-medium
                   ${
                     isSuccess
-                      ? "text-white"
-                      : "text-red"
+                      ? "text-white bg-green-500/10 border-green-500"
+                      : "text-red bg-red-500/10 border-red-500"
                   }
                 `}
               >
