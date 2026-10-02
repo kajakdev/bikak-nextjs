@@ -4,6 +4,34 @@ import { VisionSocialSection } from "@/components/VisionSocialSection";
 import { CoachesSection } from "@/components/CoachesSection";
 import { SectionCard } from "@/components/SectionCard";
 import { ContactGallerySection } from "@/components/ContactGallerySection";
+import {
+  LatestNewsSection,
+  type NewsItem,
+} from "@/components/LatestNewsSection";
+
+const news: NewsItem[] = [
+  {
+    id: 1,
+    title: "Tornát nyertünk Losoncon",
+    imageSrc: "/news/losonc.jpg",
+    imageAlt: "Szigeti Bikák csapata a losonci tornán",
+    href: "/hirek/tornat-nyertunk-losoncon",
+  },
+  {
+    id: 2,
+    title: "Újabb sikeres hétvégén vagyunk túl",
+    imageSrc: "/news/hetvege.jpg",
+    imageAlt: "Szigeti Bikák mérkőzés",
+    href: "/hirek/ujabb-sikeres-hetvege",
+  },
+  {
+    id: 3,
+    title: "Elkezdődött az új szezon",
+    imageSrc: "/news/szezon.jpg",
+    imageAlt: "Szigeti Bikák szezonnyitó",
+    href: "/hirek/elkezdodott-az-uj-szezon",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -31,7 +59,7 @@ export default function HomePage() {
             visionText="A Szigeti Bikák egyedülálló fejlesztési rendszerrel és egyénre szabott visszajelzésekkel támogatja a játékosok folyamatos fejlődését. Munkánkat nemzetközi minták és élvonalbeli szakmai szemlélet alapján építjük fel, hogy játékosaink már fiatal korban a legmagasabb szint elvárásaihoz szokjanak hozzá. Ismerd meg klubunk vízióját és hosszú távú fejlesztési programunkat, amely a magyar és a nemzetközi jégkorong világába is utat nyit a gyerekek előtt."
             visionImageSrc="/images/vision.jpg"
             visionImageAlt="Szigeti Bikák"
-            visionHref="/vision"
+            visionHref="/rolunk"
             visionBtnLabel="A Bikák víziója"
             facebookHref="https://www.facebook.com/szigetibikakse"
             instagramHref="https://www.instagram.com/szigeti_bikak"
@@ -107,7 +135,7 @@ export default function HomePage() {
           imagePosition="right"
           layout="half"
           ctaLabel="Fejlődj te is nálunk"
-          ctaHref="/kapcsolat"
+          ctaHref="/fun"
         />
         <SectionCard
           title="Reakt"
@@ -138,10 +166,47 @@ export default function HomePage() {
           ctaLabel="Wow, ilyen van?"
           ctaHref="/reakt"
         />
+        <SectionCard
+          title="Korisuli"
+          lead="Ide jön a Korisuli szöveg intro része"
+          description={
+            <p>
+              Az alapmozgásoktól egészen a legmagasabb szintű
+              technikai kivitelezésig fejlesztünk, modern
+              módszerekkel és innovatív eszközökkel támogatva
+              a tanulást. Itt minden játékos személyre szabott
+              figyelmet kap, hogy a benne rejlő maximumot
+              hozhassa ki magából.
+            </p>
+          }
+          images={[
+            {
+              src: "/images/image-1.png",
+              alt: "Korisuli 1",
+            },
+            {
+              src: "/images/fun-2.png",
+              alt: "Korisuli 2",
+            },
+            {
+              src: "/images/fun-3.png",
+              alt: "Korisuli 3",
+            },
+          ]}
+          badgeImage="/korisuli-logo.png"
+          badgeAlt="Korisuli"
+          imagePosition="right"
+          layout="half"
+          ctaLabel="Próbáld ki te is"
+          ctaHref="/korisuli"
+        />
+        <LatestNewsSection
+          news={news}
+        />
         <ContactGallerySection
           galleryImageSrc="/images/gallery.jpg"
           galleryImageAlt="Szigeti Bikák csapat"
-          galleryHref="/galeria"
+          galleryHref="https://www.facebook.com/groups/1461173688912451"
           mapImageSrc="/images/map.jpg"
           mapImageAlt="Pesterzsébet Jégcsarnok térkép"
           address="Budapest, Zodony u. 1, 1203"
