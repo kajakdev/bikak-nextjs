@@ -6,7 +6,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Rólunk", href: "/rolunk" },
+  { label: "Víziónk", href: "/vizionk" },
   { label: "Csapatok", href: "/csapatok" },
   { label: "Edzők", href: "/edzok" },
   { label: "Fun", href: "/fun" },

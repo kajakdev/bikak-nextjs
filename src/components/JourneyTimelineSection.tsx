@@ -337,7 +337,7 @@ function StepContent({
   step: JourneyStep;
 }) {
   return (
-    <div className="text-white">
+    <div className="text-white text-lg">
       <h3 className="text-xl font-extrabold uppercase leading-tight lg:text-2xl">
         {step.title}
       </h3>

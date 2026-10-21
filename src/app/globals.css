@@ -69,7 +69,7 @@
 }
 
 @utility section-hero {
-  background-image: url("/hero-bg.png");
+  background-image: url("/hero-bg.jpg");
   background-size: cover;
   background-position: center;
 }

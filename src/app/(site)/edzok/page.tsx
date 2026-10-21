@@ -22,33 +22,88 @@ export default function CoachesPage() {
         coaches={[
           {
           name: "Galló Illés",
-          role: "Szakmai igazgató, vezető edző U12",
-          imageSrc: "/images/coaches/illes.jpg",
+          role: "Szakmai igazgató, vezető edző U14",
+          imageSrc: "/images/coaches/szb_edzok_illes.jpg",
           },
           {
-          name: "Edző neve",
-          role: "Vezető edző U10",
-          imageSrc: "/images/coaches/illes.jpg",
+          name: "Niko Souoroniemi",
+          role: "U19 edző",
+          imageSrc: "/images/coaches/szb_edzok_niko.jpg",
           },
           {
-          name: "Edző neve",
-          role: "Edző U8",
-          imageSrc: "/images/coaches/illes.jpg",
+          name: "Szappanos Dávid",
+          role: "U19 vezetőedző",
+          imageSrc: "/images/coaches/szb_edzok_szapi.jpg",
           },
           {
-          name: "Edző neve",
+          name: "Csehy Zsombor",
+          role: "U14 edző / u8 vezetőedző",
+          imageSrc: "/images/coaches/szb_edzok_zsombi.jpg",
+          },
+          {
+          name: "Oláh Nándor",
+          role: "U12 vezetőedző",
+          imageSrc: "/images/coaches/szb_edzok_nandi.jpg",
+          },
+          {
+          name: "Kövesi Balázs",
+          role: "U10 vezetőedző",
+          imageSrc: "/images/coaches/szb_edzok_kavics.jpg",
+          },
+          {
+          name: "Lévai Pál",
+          role: "U8 edző",
+          imageSrc: "/images/coaches/szb_edzok_pali_bacsi.jpg",
+          },
+          {
+          name: "Ábrahám Péter",
+          role: "u10 edző / u12 edző",
+          imageSrc: "/images/coaches/ceti.jpg",
+          },
+          {
+          name: "Pajor Balázs",
+          role: "U10 edző",
+          imageSrc: "/images/coaches/szb_edzok_bazsi.jpg",
+          },
+          {
+          name: "Horváth André",
+          role: "kapus vezetőedző",
+          imageSrc: "/images/coaches/szb_edzok_andre.jpg",
+          },
+          {
+          name: "Nagy Kristóf",
           role: "Kapusedző",
-          imageSrc: "/images/coaches/illes.jpg",
+          imageSrc: "/images/coaches/szb_edzok_kiko.jpg",
           },
           {
-          name: "Edző neve",
+          name: "Modok Levente",
           role: "Erőnléti edző",
-          imageSrc: "/images/coaches/illes.jpg",
+          imageSrc: "/images/coaches/szb_edzok_modi.jpg",
           },
           {
-          name: "Edző neve",
-          role: "Edző U14",
-          imageSrc: "/images/coaches/illes.jpg",
+          name: "Szabó Zsolt",
+          role: "U8 edző",
+          imageSrc: "/images/coaches/szb_edzok_zsolt.jpg",
+          },
+          {
+          name: "Veres János",
+          role: "Korisuli / u8 edző",
+          imageSrc: "/images/coaches/szb_edzok_jana.jpg",
+          },
+          {
+          name: "Vajda Virág",
+          role: "Korisuli / u8 edző",
+          imageSrc: "/images/coaches/szb_edzok_virag.jpg",
+          },
+          {
+          name: "Balogh Bettina",
+          role: "Korisuli / u8 edző",
+          imageSrc: "/images/coaches/szb_edzok_bogi.jpg",
+          },
+          {
+          name: "Balogh Brigitta",
+          role: "Korisuli / u8 edző",
+          imageSrc: "/images/coaches/szb_edzok_brigi.jpg",
           },
         ]}
       />
