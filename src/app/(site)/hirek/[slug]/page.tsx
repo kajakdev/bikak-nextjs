@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { news } from "@/data/news";
+import { getNewsBySlug } from "@/lib/wordpress";
 
 type NewsPageProps = {
   params: Promise<{
@@ -11,20 +11,11 @@ type NewsPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return news.map((item) => ({
-    slug: item.slug,
-  }));
-}
-
 export async function generateMetadata({
   params,
 }: NewsPageProps): Promise<Metadata> {
   const { slug } = await params;
-
-  const article = news.find(
-    (item) => item.slug === slug
-  );
+  const article = await getNewsBySlug(slug);
 
   if (!article) {
     return {
@@ -35,6 +26,15 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      images:
+        article.imageSrc &&
+        !article.imageSrc.startsWith("/news/placeholder")
+          ? [{ url: article.imageSrc }]
+          : [],
+    },
   };
 }
 
@@ -42,10 +42,7 @@ export default async function NewsDetailPage({
   params,
 }: NewsPageProps) {
   const { slug } = await params;
-
-  const article = news.find(
-    (item) => item.slug === slug
-  );
+  const article = await getNewsBySlug(slug);
 
   if (!article) {
     notFound();
@@ -54,24 +51,20 @@ export default async function NewsDetailPage({
   return (
     <article className="w-full">
       <div className="container-site py-16 lg:py-24">
-        {/* Vissza */}
+        {/* Vissza a hírekhez */}
         <Link
           href="/hirek"
           className="
             inline-flex items-center gap-3
             text-sm font-extrabold uppercase
-            text-red transition-opacity
-            hover:opacity-70
+            text-red transition-opacity hover:opacity-70
           "
         >
-          <span aria-hidden="true">
-            ←
-          </span>
-
+          <span aria-hidden="true">←</span>
           Összes hír
         </Link>
 
-        {/* Fejléc */}
+        {/* Cikk fejléc */}
         <header className="mt-8 max-w-5xl">
           {article.date && (
             <time
@@ -93,50 +86,57 @@ export default async function NewsDetailPage({
           )}
         </header>
 
-        {/* Kiemelt kép */}
-        <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:mt-14">
-          <Image
-            src={article.imageSrc}
-            alt={
-              article.imageAlt ??
-              article.title
-            }
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1600px) 100vw, 1600px"
-          />
-        </div>
+        {/* WordPress kiemelt kép */}
+        {article.imageSrc && (
+          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:mt-14">
+            <Image
+              src={article.imageSrc}
+              alt={article.imageAlt || article.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1600px) 100vw, 1600px"
+            />
+          </div>
+        )}
 
-        {/* Tartalom */}
+        {/* WordPress cikk tartalma */}
         {article.content && (
           <div
             className="
-              mx-auto mt-12 max-w-4xl
-              whitespace-pre-line
+              news-content mx-auto mt-12 max-w-4xl
               text-lg leading-relaxed text-white/90
               lg:mt-16 lg:text-xl
             "
-          >
-            {article.content}
-          </div>
+            dangerouslySetInnerHTML={{
+              __html: article.content,
+            }}
+          />
         )}
+
+        {/* Vissza */}
+        <div className="mx-auto mt-16 max-w-4xl border-t border-white/20 pt-8">
+          <Link
+            href="/hirek"
+            className="
+              inline-flex items-center gap-3
+              text-lg font-extrabold uppercase
+              text-white transition-colors hover:text-red
+            "
+          >
+            <span aria-hidden="true">←</span>
+            Vissza a hírekhez
+          </Link>
+        </div>
       </div>
     </article>
   );
 }
 
-function formatDate(
-  date: string
-) {
-  return new Intl.DateTimeFormat(
-    "hu-HU",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-  ).format(
-    new Date(`${date}T00:00:00`)
-  );
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat("hu-HU", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(`${date}T00:00:00`));
 }
