@@ -74,12 +74,9 @@ export function JourneyTimelineSection({
       markers.forEach((marker) => {
         const markerRect = marker.getBoundingClientRect();
 
-        const markerTop =
-          markerRect.top - rect.top;
+        const markerTop = markerRect.top - rect.top;
 
-        const stepNumber = Number(
-          marker.dataset.step
-        );
+        const stepNumber = Number(marker.dataset.step);
 
         if (fillPosition >= markerTop) {
           active.push(stepNumber);
@@ -91,29 +88,15 @@ export function JourneyTimelineSection({
 
     updateProgress();
 
-    window.addEventListener(
-      "scroll",
-      updateProgress,
-      {
-        passive: true,
-      }
-    );
+    window.addEventListener("scroll", updateProgress, {
+      passive: true,
+    });
 
-    window.addEventListener(
-      "resize",
-      updateProgress
-    );
+    window.addEventListener("resize", updateProgress);
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        updateProgress
-      );
-
-      window.removeEventListener(
-        "resize",
-        updateProgress
-      );
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
     };
   }, []);
 
@@ -125,7 +108,6 @@ export function JourneyTimelineSection({
       <div className="container-site">
         <div className="mx-auto max-w-[1180px]">
           <div className="relative">
-
             {/* TIMELINE BACKGROUND */}
             <div
               aria-hidden="true"
@@ -167,13 +149,10 @@ export function JourneyTimelineSection({
                   key={step.number}
                   step={step}
                   index={index}
-                  isActive={activeSteps.includes(
-                    step.number
-                  )}
+                  isActive={activeSteps.includes(step.number)}
                 />
               ))}
             </div>
-
           </div>
         </div>
       </div>
@@ -199,22 +178,28 @@ function TimelineStep({
       className="
         relative
         grid
+        grid-cols-1
         items-center
         gap-8
         lg:grid-cols-[1fr_80px_1fr]
         lg:gap-10
       "
     >
-      {/* LEFT SIDE */}
-      <div className="lg:col-start-1 lg:row-start-1">
-        {imageOnLeft ? (
-          <StepImage step={step} />
-        ) : (
-          <StepContent step={step} />
-        )}
+      {/* KÉP – mobilon mindig első */}
+      <div
+        className={`
+          order-1
+          ${
+            imageOnLeft
+              ? "lg:col-start-1 lg:row-start-1"
+              : "lg:col-start-3 lg:row-start-1"
+          }
+        `}
+      >
+        <StepImage step={step} />
       </div>
 
-      {/* MARKER */}
+      {/* TIMELINE MARKER – csak desktopon */}
       <div
         data-timeline-marker
         data-step={step.number}
@@ -234,13 +219,18 @@ function TimelineStep({
         />
       </div>
 
-      {/* RIGHT SIDE */}
-      <div className="lg:col-start-3 lg:row-start-1">
-        {imageOnLeft ? (
-          <StepContent step={step} />
-        ) : (
-          <StepImage step={step} />
-        )}
+      {/* SZÖVEG – mobilon mindig második */}
+      <div
+        className={`
+          order-2
+          ${
+            imageOnLeft
+              ? "lg:col-start-3 lg:row-start-1"
+              : "lg:col-start-1 lg:row-start-1"
+          }
+        `}
+      >
+        <StepContent step={step} />
       </div>
     </article>
   );
@@ -337,7 +327,7 @@ function StepContent({
   step: JourneyStep;
 }) {
   return (
-    <div className="text-white text-lg">
+    <div className="text-lg text-white">
       <h3 className="text-xl font-extrabold uppercase leading-tight lg:text-2xl">
         {step.title}
       </h3>
@@ -346,18 +336,15 @@ function StepContent({
         {step.description}
       </p>
 
-      {step.bullets &&
-        step.bullets.length > 0 && (
-          <ul className="mt-2 list-disc space-y-1 pl-6 leading-relaxed text-white/90">
-            {step.bullets.map(
-              (bullet, index) => (
-                <li key={`${bullet}-${index}`}>
-                  {bullet}
-                </li>
-              )
-            )}
-          </ul>
-        )}
+      {step.bullets && step.bullets.length > 0 && (
+        <ul className="mt-2 list-disc space-y-1 pl-6 leading-relaxed text-white/90">
+          {step.bullets.map((bullet, index) => (
+            <li key={`${bullet}-${index}`}>
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {step.closing && (
         <p className="mt-2 leading-relaxed text-white/90">
