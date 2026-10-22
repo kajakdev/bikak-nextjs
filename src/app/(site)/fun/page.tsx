@@ -55,7 +55,7 @@ export default function FunPage() {
             </>
           }
           ctaLabel="Fejlődj te is nálunk"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_01.jpg"
           imagePosition="right"
           layout="half"
@@ -75,7 +75,7 @@ export default function FunPage() {
             </>
           }
           ctaLabel="Fejlődj te is nálunk"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_02.jpg"
           imagePosition="left"
           layout="half"
@@ -95,7 +95,7 @@ export default function FunPage() {
             </>
           }
           ctaLabel="Fejlődj te is nálunk"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_03.jpg"
           imagePosition="right"
           layout="half"
@@ -115,7 +115,7 @@ export default function FunPage() {
             </>
           }
           ctaLabel="Fejlődj te is nálunk"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_04.jpg"
           imagePosition="left"
           layout="half"
@@ -135,7 +135,7 @@ export default function FunPage() {
             </>
           }
           ctaLabel="Fejlődj te is nálunk"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_05.jpg"
           imagePosition="right"
           layout="half"

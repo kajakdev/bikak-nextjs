@@ -42,7 +42,7 @@ export function VisionSocialSection({
                 Víziónk
               </h2>
 
-              <article className="overflow-hidden rounded-[24px] bg-white">
+              <article className="overflow-hidden rounded-[24px] bg-foreground text-white">
                 <div className="relative aspect-[16/8] w-full">
                   <Image
                     src={visionImageSrc}

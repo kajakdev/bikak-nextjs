@@ -48,7 +48,7 @@ type CoachCardProps = {
 
 function CoachCard({ coach }: CoachCardProps) {
   return (
-    <article className="overflow-hidden rounded-[20px] bg-white">
+    <article className="overflow-hidden rounded-[20px] bg-foreground text-white">
       {/* IMAGE */}
       <div className="relative aspect-[1/1] w-full overflow-hidden">
         <Image

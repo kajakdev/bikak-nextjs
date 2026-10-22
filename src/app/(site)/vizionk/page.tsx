@@ -138,7 +138,7 @@ export default function VisionPage() {
           </>
         }
         ctaLabel="Csatlakozz hozzánk"
-        ctaHref="#"
+        ctaHref="/kapcsolat"
         imageSrc="/images/about-5.png"
         imageAlt="A mi víziónk"
         imagePosition="right"

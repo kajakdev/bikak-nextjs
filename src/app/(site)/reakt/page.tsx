@@ -166,7 +166,7 @@ export default function ReaktPage() {
             </>
           }
           ctaLabel="Kapcsolatfelvétel"
-					ctaHref="#"
+					ctaHref="/kapcsolat"
           imageSrc="/images/fun_05.jpg"
           imagePosition="left"
           layout="half"
