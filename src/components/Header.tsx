@@ -12,6 +12,7 @@ const navItems = [
   { label: "Fun", href: "/fun" },
   { label: "Reakt", href: "/reakt" },
   { label: "Korisuli", href: "/korisuli" },
+  { label: "Hírek", href: "/hirek" },
   { label: "Kapcsolat", href: "/kapcsolat" },
 ];
 

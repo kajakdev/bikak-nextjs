@@ -51,82 +51,104 @@ export default async function NewsDetailPage({
   return (
     <article className="w-full">
       <div className="container-site py-16 lg:py-24">
-        {/* Vissza a hírekhez */}
-        <Link
-          href="/hirek"
-          className="
-            inline-flex items-center gap-3
-            text-sm font-extrabold uppercase
-            text-red transition-opacity hover:opacity-70
-          "
-        >
-          <span aria-hidden="true">←</span>
-          Összes hír
-        </Link>
+        {/* Teljes híroldal egységes szélességgel */}
+        <div className="mx-auto w-full max-w-4xl">
 
-        {/* Cikk fejléc */}
-        <header className="mt-8 max-w-5xl">
-          {article.date && (
-            <time
-              dateTime={article.date}
-              className="eyebrow text-red"
-            >
-              {formatDate(article.date)}
-            </time>
-          )}
-
-          <h1 className="heading-page mt-3 text-white">
-            {article.title}
-          </h1>
-
-          {article.excerpt && (
-            <p className="mt-6 max-w-3xl text-xl font-medium leading-relaxed text-white/80 lg:text-2xl">
-              {article.excerpt}
-            </p>
-          )}
-        </header>
-
-        {/* WordPress kiemelt kép */}
-        {article.imageSrc && (
-          <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:mt-14">
-            <Image
-              src={article.imageSrc}
-              alt={article.imageAlt || article.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1600px) 100vw, 1600px"
-            />
-          </div>
-        )}
-
-        {/* WordPress cikk tartalma */}
-        {article.content && (
-          <div
-            className="
-              news-content mx-auto mt-12 max-w-4xl
-              text-lg leading-relaxed text-white/90
-              lg:mt-16 lg:text-xl
-            "
-            dangerouslySetInnerHTML={{
-              __html: article.content,
-            }}
-          />
-        )}
-
-        {/* Vissza */}
-        <div className="mx-auto mt-16 max-w-4xl border-t border-white/20 pt-8">
+          {/* Vissza a hírekhez */}
           <Link
             href="/hirek"
             className="
-              inline-flex items-center gap-3
-              text-lg font-extrabold uppercase
-              text-white transition-colors hover:text-red
+              group hidden shrink-0 items-center gap-3
+              text-md font-extrabold uppercase text-white
+              transition-colors hover:text-red
+              sm:flex
             "
           >
-            <span aria-hidden="true">←</span>
-            Vissza a hírekhez
+            <Image
+                className="h-[20px] w-[20px] mr-1 hover:mr-2 transition-all duration-300 rotate-180"
+                src="/arrow.svg"
+                alt="Arrow"
+                width={20}
+                height={20}
+            />
+            <span>Összes hír</span>
           </Link>
+
+          {/* Fejléc */}
+          <header className="mt-10">
+            {/* Dátum */}
+            {article.date && (
+              <time
+                dateTime={article.date}
+                className="eyebrow text-red"
+              >
+                {formatDate(article.date)}
+              </time>
+            )}
+
+            {/* Cím */}
+            <h1 className="heading-page mt-3 text-white">
+              {article.title}
+            </h1>
+
+            {/* Kivonat */}
+            {article.excerpt && (
+              <p className="mt-6 text-xl font-medium leading-relaxed text-white/80 lg:text-2xl">
+                {article.excerpt}
+              </p>
+            )}
+          </header>
+
+          {/* WordPress kiemelt kép */}
+          {article.imageSrc && (
+            <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:mt-12">
+              <Image
+                src={article.imageSrc}
+                alt={article.imageAlt || article.title}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 896px) 100vw, 896px"
+              />
+            </div>
+          )}
+
+          {/* WordPress cikk tartalma */}
+          {article.content && (
+            <div
+              className="
+                news-content mt-12
+                text-lg leading-relaxed text-white/90
+                lg:mt-16 lg:text-xl
+              "
+              dangerouslySetInnerHTML={{
+                __html: article.content,
+              }}
+            />
+          )}
+
+          {/* Vissza a hírekhez */}
+          <div className="mt-16 border-t border-white/20 pt-8">
+            <Link
+              href="/hirek"
+              className="
+                group hidden shrink-0 items-center gap-3
+                text-md font-extrabold uppercase text-white
+                transition-colors hover:text-red
+                sm:flex
+              "
+            >
+              <Image
+                  className="h-[20px] w-[20px] mr-1 hover:mr-2 transition-all duration-300 rotate-180"
+                  src="/arrow.svg"
+                  alt="Arrow"
+                  width={20}
+                  height={20}
+              />
+              <span>Vissza a hírekhez</span>
+            </Link>
+          </div>
+
         </div>
       </div>
     </article>

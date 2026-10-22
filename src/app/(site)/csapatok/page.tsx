@@ -33,7 +33,20 @@ export default function TeamsPage() {
             </p>
           </>
         }
-        imageSrc="/images/u8.png"
+        images={[
+          {
+            src: "/images/teams/U8_01.jpg",
+            alt: "U8",
+          },
+          {
+            src: "/images/teams/U8_02.jpg",
+            alt: "U8",
+          },
+          {
+            src: "/images/teams/U8_03.jpg",
+            alt: "U8",
+          },
+        ]}
         imagePosition="right"
         layout="half"
       />
@@ -53,7 +66,20 @@ export default function TeamsPage() {
             </p>
           </>
         }
-        imageSrc="/images/u8.png"
+        images={[
+          {
+            src: "/images/teams/U10_01.jpg",
+            alt: "U10",
+          },
+          {
+            src: "/images/teams/U10_02.jpg",
+            alt: "U10",
+          },
+          {
+            src: "/images/teams/U10_03.jpg",
+            alt: "U10",
+          },
+        ]}
         imagePosition="left"
         layout="half"
       />
@@ -72,7 +98,20 @@ export default function TeamsPage() {
             </p>
           </>
         }
-        imageSrc="/images/u8.png"
+        images={[
+          {
+            src: "/images/teams/U12_01.jpg",
+            alt: "U12",
+          },
+          {
+            src: "/images/teams/U12_02.jpg",
+            alt: "U12",
+          },
+          {
+            src: "/images/teams/U12_03.jpg",
+            alt: "U12",
+          },
+        ]}
         imagePosition="right"
         layout="half"
       />
@@ -91,7 +130,20 @@ export default function TeamsPage() {
             </p>
           </>
         }
-        imageSrc="/images/u8.png"
+        images={[
+          {
+            src: "/images/teams/U14_01.jpg",
+            alt: "U14",
+          },
+          {
+            src: "/images/teams/U14_02.jpg",
+            alt: "U14",
+          },
+          {
+            src: "/images/teams/U14_03.jpg",
+            alt: "U14",
+          },
+        ]}
         imagePosition="left"
         layout="half"
       />
@@ -110,7 +162,20 @@ export default function TeamsPage() {
             </p>
           </>
         }
-        imageSrc="/images/u8.png"
+        images={[
+          {
+            src: "/images/teams/U19_01.jpg",
+            alt: "U19",
+          },
+          {
+            src: "/images/teams/U19_02.jpg",
+            alt: "U19",
+          },
+          {
+            src: "/images/teams/U19_03.jpg",
+            alt: "U19",
+          },
+        ]}
         imagePosition="right"
         layout="half"
       />

@@ -58,7 +58,7 @@ export default function CoachesPage() {
           {
           name: "Ábrahám Péter",
           role: "u10 edző / u12 edző",
-          imageSrc: "/images/coaches/ceti.jpg",
+          imageSrc: "/images/coaches/szb_edzok_ceti.jpg",
           },
           {
           name: "Pajor Balázs",

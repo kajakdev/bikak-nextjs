@@ -5,9 +5,11 @@ import { CoachesSection } from "@/components/CoachesSection";
 import { SectionCard } from "@/components/SectionCard";
 import { ContactGallerySection } from "@/components/ContactGallerySection";
 import { LatestNewsSection } from "@/components/LatestNewsSection";
-import { news } from "@/data/news";
+import { getLatestNews } from "@/lib/wordpress";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const news = await getLatestNews();
+
   return (
     <>
       <HomeHeroSlider
@@ -46,34 +48,94 @@ export default function HomePage() {
             ctaHref="/edzok"
             images={[
                 {
-                src: "/images/slider-1.png",
-                alt: "Edzők és játékosok a jégen",
+                src: "/images/coaches/edzok_eletkepek_01.jpg",
+                alt: "Edzőink munka közben",
                 size: "large",
                 },
                 {
-                src: "/images/slider-2.png",
-                alt: "Szigeti Bikák csapat",
-                size: "small",
-                },
-                {
-                src: "/images/slider-3.png",
-                alt: "Edzés közben",
-                size: "small",
-                },
-                {
-                src: "/images/slider-1.png",
-                alt: "Edzők és játékosok a jégen",
+                src: "/images/coaches/edzok_eletkepek_02.jpg",
+                alt: "Edzőink munka közben",
                 size: "large",
                 },
                 {
-                src: "/images/slider-2.png",
-                alt: "Szigeti Bikák csapat",
+                src: "/images/coaches/edzok_eletkepek_03.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_04.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_06.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_07.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_08.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_09.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_10.jpg",
+                alt: "Edzőink munka közben",
                 size: "small",
                 },
                 {
-                src: "/images/slider-3.png",
-                alt: "Edzés közben",
-                size: "small",
+                src: "/images/coaches/edzok_eletkepek_11.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_12.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_13.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_14.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_15.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_16.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_17.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_18.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
+                },
+                {
+                src: "/images/coaches/edzok_eletkepek_19.jpg",
+                alt: "Edzőink munka közben",
+                size: "large",
                 },
             ]}
         />
@@ -92,16 +154,16 @@ export default function HomePage() {
           }
           images={[
             {
-              src: "/images/image-1.png",
-              alt: "Future is Now edzés",
+              src: "/images/fun_intro_01.jpg",
+              alt: "Future is Now",
             },
             {
-              src: "/images/fun-2.png",
-              alt: "Jégkorong edzés",
+              src: "/images/fun_intro_02.jpg",
+              alt: "Future is Now",
             },
             {
-              src: "/images/fun-3.png",
-              alt: "Egyéni fejlesztés",
+              src: "/images/fun_intro_03.jpg",
+              alt: "Future is Now",
             },
           ]}
           badgeImage="/future-is-now-logo.png"
@@ -121,16 +183,16 @@ export default function HomePage() {
           }
           images={[
             {
-              src: "/images/fun-2.png",
-              alt: "Future is Now edzés",
+              src: "/images/reakt_intro_01.jpg",
+              alt: "Reakt",
             },
             {
-              src: "/images/image-1.png",
-              alt: "Jégkorong edzés",
+              src: "/images/reakt_intro_02.jpg",
+              alt: "Reakt",
             },
             {
-              src: "/images/fun-3.png",
-              alt: "Egyéni fejlesztés",
+              src: "/images/reakt_intro_03.jpg",
+              alt: "Reakt",
             },
           ]}
           badgeImage="/reakt.svg"
@@ -155,16 +217,16 @@ export default function HomePage() {
           }
           images={[
             {
-              src: "/images/image-1.png",
-              alt: "Korisuli 1",
+              src: "/images/korisuli_intro_01.jpg",
+              alt: "Korisuli",
             },
             {
-              src: "/images/fun-2.png",
-              alt: "Korisuli 2",
+              src: "/images/korisuli_intro_02.jpg",
+              alt: "Korisuli",
             },
             {
-              src: "/images/fun-3.png",
-              alt: "Korisuli 3",
+              src: "/images/korisuli_intro_03.jpg",
+              alt: "Korisuli",
             },
           ]}
           badgeImage="/korisuli-logo.png"
@@ -174,9 +236,7 @@ export default function HomePage() {
           ctaLabel="Próbáld ki te is"
           ctaHref="/korisuli"
         />
-        <LatestNewsSection
-          news={news.slice(0, 3)}
-        />
+        <LatestNewsSection news={news} />
         <ContactGallerySection
           galleryImageSrc="/images/gallery.jpg"
           galleryImageAlt="Szigeti Bikák csapat"

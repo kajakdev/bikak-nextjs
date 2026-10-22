@@ -121,7 +121,7 @@ export default function ReaktPage() {
             <p>Ez az a rész, ahol a számok mögé nézünk - és valódi tartalmat adunk a fejlődésnek.</p>
             </>
           }
-          imageSrc="/images/fun-2.png"
+          imageSrc="/images/fun_03.jpg"
           imagePosition="left"
           layout="half"
         />
@@ -146,7 +146,7 @@ export default function ReaktPage() {
             </ul>
             </>
           }
-          imageSrc="/images/image-1.png"
+          imageSrc="/images/fun_04.jpg"
           imagePosition="right"
           layout="half"
         />
@@ -167,7 +167,7 @@ export default function ReaktPage() {
           }
           ctaLabel="Kapcsolatfelvétel"
 					ctaHref="#"
-          imageSrc="/images/fun-2.png"
+          imageSrc="/images/fun_05.jpg"
           imagePosition="left"
           layout="half"
         />
