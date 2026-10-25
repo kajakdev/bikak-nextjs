@@ -8,7 +8,7 @@ type Coach = {
 };
 
 type CoachesGridSectionProps = {
-  intro: string;
+  intro?: string;
   coaches: Coach[];
 };
 
@@ -17,26 +17,36 @@ export function CoachesGridSection({
   coaches,
 }: CoachesGridSectionProps) {
   return (
-    <section className="w-full py-16 lg:py-20">
+    <section
+      className={
+        intro
+          ? "w-full py-16 lg:py-20"
+          : "w-full pb-16 pt-12 lg:pb-20 lg:pt-16"
+      }
+    >
       <div className="container-site">
-
-        {/* INTRO */}
-        <div className="mx-auto max-w-4xl">
-          <div className="whitespace-pre-line text-lg leading-relaxed text-white/90 lg:text-xl">
-            {intro}
+        {intro && (
+          <div className="mx-auto max-w-4xl">
+            <div className="whitespace-pre-line text-lg leading-relaxed text-white/90 lg:text-xl">
+              {intro}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* COACHES */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
-          {coaches.map((coach) => (
+        <div
+          className={
+            intro
+              ? "mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3"
+              : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          }
+        >
+          {coaches.map((coach, index) => (
             <CoachCard
-              key={coach.name}
+              key={`${coach.name}-${index}`}
               coach={coach}
             />
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -49,7 +59,6 @@ type CoachCardProps = {
 function CoachCard({ coach }: CoachCardProps) {
   return (
     <article className="overflow-hidden rounded-[20px] bg-foreground text-white">
-      {/* IMAGE */}
       <div className="relative aspect-[1/1] w-full overflow-hidden">
         <Image
           src={coach.imageSrc}
@@ -64,7 +73,6 @@ function CoachCard({ coach }: CoachCardProps) {
         />
       </div>
 
-      {/* CONTENT */}
       <div className="px-5 py-4 text-secondary">
         <h3 className="text-2xl font-extrabold uppercase leading-none lg:text-3xl">
           {coach.name}
