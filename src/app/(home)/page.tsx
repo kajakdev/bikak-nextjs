@@ -36,7 +36,7 @@ export default async function HomePage() {
           visionText={homeContent.vision.text}
           visionImageSrc={homeContent.vision.imageSrc}
           visionImageAlt={homeContent.vision.imageAlt}
-          visionHref="/rolunk"
+          visionHref="/vizionk"
           visionBtnLabel="A Bikák víziója"
           facebookHref="https://www.facebook.com/szigetibikakse"
           instagramHref="https://www.instagram.com/szigeti_bikak"

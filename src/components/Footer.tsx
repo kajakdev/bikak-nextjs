@@ -3,6 +3,18 @@ import Link from "next/link";
 
 const partners = [
   {
+    src: "/images/partners/pesterzsebet.png",
+    alt: "Pesterzsébet",
+  },
+  {
+    src: "/images/partners/bee_hoki_logo.png",
+    alt: "Bee Hoki",
+  },
+  {
+    src: "/images/partners/hockeylab-logo.png",
+    alt: "HockeyLab",
+  },
+  {
     src: "/images/partners/jozsa-photo.png",
     alt: "Józsa Photo",
   },
@@ -11,20 +23,8 @@ const partners = [
     alt: "Click and Like",
   },
   {
-    src: "/images/partners/pesterzsebet.png",
-    alt: "Pesterzsébet",
-  },
-  {
-    src: "/images/partners/honda-center.png",
-    alt: "Honda Center",
-  },
-  {
-    src: "/images/partners/ppb.png",
-    alt: "Pacific Premier Bank",
-  },
-  {
-    src: "/images/partners/choc.png",
-    alt: "CHOC",
+    src: "/images/partners/designabc_logo_2x.png",
+    alt: "Designabc",
   },
 ];
 

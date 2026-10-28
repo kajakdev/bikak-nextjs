@@ -23,10 +23,53 @@ export function VisionSocialSection({
   facebookHref,
   instagramHref,
 }: VisionSocialSectionProps) {
+  const facebookEmbedUrl = new URL(
+    "https://www.facebook.com/plugins/page.php"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "href",
+    facebookHref
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "tabs",
+    "timeline"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "width",
+    "340"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "height",
+    "500"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "small_header",
+    "false"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "adapt_container_width",
+    "true"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "hide_cover",
+    "false"
+  );
+
+  facebookEmbedUrl.searchParams.set(
+    "show_facepile",
+    "true"
+  );
+
   return (
     <section className="relative overflow-hidden bg-background py-16">
       <div className="container-site">
-        
         {/* Background graphic */}
         <div
           aria-hidden="true"
@@ -35,11 +78,10 @@ export function VisionSocialSection({
 
         <div className="relative w-full">
           <div className="grid w-full gap-10 lg:grid-cols-[2fr_1fr] lg:gap-6">
-            
             {/* LEFT */}
             <div>
               <h2 className="heading-page mb-8 text-white">
-                Víziónk
+                {visionTitle}
               </h2>
 
               <article className="overflow-hidden rounded-[24px] bg-foreground text-white">
@@ -69,39 +111,52 @@ export function VisionSocialSection({
             </div>
 
             {/* RIGHT */}
-            <aside>
+            <aside className="min-w-0">
               <h2 className="heading-page mb-8 text-white">
                 Kövess minket!
               </h2>
 
               <div className="overflow-hidden rounded-[24px] bg-white p-4">
                 {/* Facebook embed */}
-                <div className="w-full bg-neutral-100">
+                <div className="flex w-full justify-center overflow-hidden bg-neutral-100">
                   <iframe
                     title="Szigeti Bikák Facebook"
-                    src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
-                      facebookHref
-                    )}&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}
-                    width="100%"
+                    src={facebookEmbedUrl.toString()}
+                    width="340"
                     height="500"
-                    className="block w-full"
-                    style={{ border: "none", overflow: "hidden" }}
+                    className="block max-w-full border-0"
+                    style={{
+                      overflow: "hidden",
+                    }}
+                    data-show_posts="true"
+                    loading="lazy"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   />
                 </div>
+
+                {/* Facebook fallback link */}
+                <Link
+                  href={facebookHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 block text-center text-sm font-semibold text-foreground underline underline-offset-4 hover:opacity-70"
+                >
+                  Facebook-oldal megnyitása
+                </Link>
               </div>
 
+              {/* Instagram */}
               <Link
                 href={instagramHref}
                 target="_blank"
-                rel="noreferrer"
-                className="mt-4 flex items-center justify-between rounded-[24px] bg-foreground px-6 py-6 transition text-white hover:opacity-90"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center justify-between rounded-[24px] bg-foreground px-6 py-6 text-white transition hover:opacity-90"
               >
                 <div className="flex items-center gap-4">
                   <InstagramIcon />
 
                   <div>
-                    <p className="text-3xl uppercase font-bold text-white">
+                    <p className="text-3xl font-bold uppercase text-white">
                       Szigeti Bikák
                     </p>
 
@@ -112,11 +167,11 @@ export function VisionSocialSection({
                 </div>
 
                 <Image
-                    className="h-[40px] w-[40px] ml-2 hover:ml-3 transition-all duration-300"
-                    src="/arrow.svg"
-                    alt="Arrow"
-                    width={40}
-                    height={40}
+                  className="ml-2 h-[40px] w-[40px] transition-all duration-300 hover:ml-3"
+                  src="/arrow.svg"
+                  alt="Instagram megnyitása"
+                  width={40}
+                  height={40}
                 />
               </Link>
             </aside>
@@ -137,9 +192,27 @@ function InstagramIcon() {
       stroke="currentColor"
       strokeWidth="1.8"
     >
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+      />
+
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+      />
+
+      <circle
+        cx="17.5"
+        cy="6.5"
+        r="1"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }
