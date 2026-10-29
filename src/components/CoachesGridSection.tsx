@@ -1,10 +1,17 @@
-import Image from "next/image";
+
+import {
+  WordPressImage,
+  type WordPressImageData,
+} from "@/components/WordPressImage";
 
 type Coach = {
   name: string;
   role: string;
   imageSrc: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageSources?: WordPressImageData["sources"];
 };
 
 type CoachesGridSectionProps = {
@@ -60,16 +67,18 @@ function CoachCard({ coach }: CoachCardProps) {
   return (
     <article className="overflow-hidden rounded-[20px] bg-foreground text-white">
       <div className="relative aspect-[1/1] w-full overflow-hidden">
-        <Image
-          src={coach.imageSrc}
+        <WordPressImage
+          image={{
+            src: coach.imageSrc,
+            alt: coach.imageAlt ?? coach.name,
+            width: coach.imageWidth,
+            height: coach.imageHeight,
+            sources: coach.imageSources,
+          }}
           alt={coach.imageAlt ?? coach.name}
           fill
           className="object-cover"
-          sizes="
-            (max-width: 640px) 100vw,
-            (max-width: 1024px) 50vw,
-            33vw
-          "
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
 

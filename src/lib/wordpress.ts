@@ -19,7 +19,7 @@ const WORDPRESS_URL = process.env.WORDPRESS_URL;
 function stripHtml(value: string): string {
   return value
     .replace(/<br\s*\/?>/gi, " ")
-    .replace(/<\/(?:p|div|li)>/gi, " ")
+    .replace(/<\/?(?:p|div|li)>/gi, " ")
     .replace(/<[^>]*>/g, "")
     .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/gi, "&")
@@ -161,6 +161,7 @@ type WordPressImage = {
   alt?: string;
   width?: number;
   height?: number;
+  sizes?: Record<string, string | number>;
 };
 
 type WordPressImageField =
@@ -182,6 +183,41 @@ function getImage(
   }
 
   return null;
+}
+
+function getImageSources(
+  image: WordPressImage
+): { src: string; width: number }[] {
+  const sizes = image.sizes ?? {};
+
+  return Object.entries(sizes)
+    .flatMap(([key, value]) => {
+      if (
+        key === "thumbnail" ||
+        key.endsWith("-width") ||
+        key.endsWith("-height") ||
+        typeof value !== "string"
+      ) {
+        return [];
+      }
+
+      const width = sizes[`${key}-width`];
+
+      if (
+        typeof width !== "number" ||
+        width <= 0
+      ) {
+        return [];
+      }
+
+      return [
+        {
+          src: value,
+          width,
+        },
+      ];
+    })
+    .sort((a, b) => a.width - b.width);
 }
 
 // --------------------------------------------------
@@ -298,6 +334,9 @@ function mapSectionCard(
             image.alt ||
             block.title ||
             "Szigeti Bikák",
+          width: image.width,
+          height: image.height,
+          sources: getImageSources(image),
         },
       ];
     }
@@ -669,8 +708,10 @@ export async function getHomePageContent(): Promise<HomePageContent> {
     text: stripHtml(
       acf?.vizionk_blokk?.szoveg ?? ""
     ),
+
     imageSrc:
       visionImage?.url ?? "/images/vision.jpg",
+
     imageAlt:
       visionImage?.alt || "Szigeti Bikák",
   };

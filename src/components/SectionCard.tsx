@@ -2,27 +2,22 @@
 
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 
 import { Button } from "@/components/Button";
-
-type SectionCardImage = {
-  src: string;
-  alt?: string;
-};
+import {
+  WordPressImage,
+  type WordPressImageData,
+} from "@/components/WordPressImage";
 
 type SectionCardProps = {
   title: string;
   lead?: string;
   description: ReactNode;
 
-  // Sima képhez
   imageSrc?: string;
   imageAlt?: string;
-
-  // Carouselhez
-  images?: SectionCardImage[];
+  images?: WordPressImageData[];
 
   imagePosition?: "left" | "right";
   layout?: "half" | "third";
@@ -32,7 +27,6 @@ type SectionCardProps = {
   ctaLabel?: string;
   ctaHref?: string;
 
-  // Jobb felső badge / logo
   badgeImage?: string;
   badgeAlt?: string;
   badgeWidth?: number;
@@ -43,20 +37,14 @@ export function SectionCard({
   title,
   lead,
   description,
-
   imageSrc,
   imageAlt,
-
   images,
-
   imagePosition = "right",
   layout = "half",
-
   eyebrow,
-
   ctaLabel,
   ctaHref,
-
   badgeImage,
   badgeAlt = "",
   badgeWidth = 300,
@@ -66,12 +54,7 @@ export function SectionCard({
     images && images.length > 0
       ? images
       : imageSrc
-        ? [
-            {
-              src: imageSrc,
-              alt: imageAlt ?? title,
-            },
-          ]
+        ? [{ src: imageSrc, alt: imageAlt ?? title }]
         : [];
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -152,7 +135,7 @@ export function SectionCard({
     <section className="w-full">
       <div className="container-site">
         <div className="section-block relative mt-8 overflow-hidden rounded-[24px] text-white">
-          {/* BADGE - mindig a teljes SectionCard jobb felső sarkában */}
+          {/* BADGE */}
           {badgeImage && (
             <div
               className="
@@ -169,11 +152,13 @@ export function SectionCard({
                 sm:top-8
               "
             >
-              <Image
-                src={badgeImage}
+              <WordPressImage
+                image={{
+                  src: badgeImage,
+                  width: badgeWidth,
+                  height: badgeHeight,
+                }}
                 alt={badgeAlt}
-                width={badgeWidth}
-                height={badgeHeight}
                 className="
                   h-auto
                   max-h-[150px]
@@ -283,8 +268,8 @@ export function SectionCard({
                         flex-[0_0_100%]
                       "
                     >
-                      <Image
-                        src={image.src}
+                      <WordPressImage
+                        image={image}
                         alt={
                           image.alt ??
                           imageAlt ??

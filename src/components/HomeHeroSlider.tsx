@@ -1,13 +1,22 @@
+
 "use client";
 
-import Image from "next/image";
 import { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+
+import {
+  WordPressImage,
+  type WordPressImageData,
+} from "@/components/WordPressImage";
 
 type HeroSlide = {
   imageSrc: string;
   imageAlt: string;
   badge: string;
+
+  imageWidth?: number;
+  imageHeight?: number;
+  imageSources?: WordPressImageData["sources"];
 };
 
 type HomeHeroSliderProps = {
@@ -44,8 +53,14 @@ export function HomeHeroSlider({
               className="relative min-w-0 flex-[0_0_100%]"
             >
               <div className="relative h-[520px] sm:h-[600px] lg:h-[680px] xl:h-[760px]">
-                <Image
-                  src={slide.imageSrc}
+                <WordPressImage
+                  image={{
+                    src: slide.imageSrc,
+                    alt: slide.imageAlt,
+                    width: slide.imageWidth,
+                    height: slide.imageHeight,
+                    sources: slide.imageSources,
+                  }}
                   alt={slide.imageAlt}
                   fill
                   priority={index === 0}
@@ -53,7 +68,7 @@ export function HomeHeroSlider({
                   sizes="100vw"
                 />
 
-                {/* finom overlay, hogy a badge/nav jobban olvasható legyen */}
+                {/* Finom overlay */}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 bg-black/5"
@@ -106,11 +121,11 @@ export function HomeHeroSlider({
           lg:size-16
         "
       >
-        <Image
+        <img
           src="/arrow-prev.svg"
           alt=""
-          fill
-          className="object-contain"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-contain"
         />
       </button>
 
@@ -135,11 +150,11 @@ export function HomeHeroSlider({
           lg:size-16
         "
       >
-        <Image
+        <img
           src="/arrow-next.svg"
           alt=""
-          fill
-          className="object-contain"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-contain"
         />
       </button>
     </section>

@@ -1,10 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+
   images: {
-    // unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -12,6 +11,10 @@ const nextConfig: NextConfig = {
         pathname: "/wp-content/uploads/**",
       },
     ],
+
+    formats: ["image/webp"],
+
+    minimumCacheTTL: 86400,
   },
 };
 

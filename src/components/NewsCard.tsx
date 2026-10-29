@@ -1,6 +1,7 @@
-import Image from "next/image";
+
 import Link from "next/link";
 
+import { WordPressImage } from "@/components/WordPressImage";
 import type { NewsItem } from "@/types/news";
 
 type NewsCardProps = {
@@ -28,8 +29,11 @@ export function NewsCard({
             ${featured ? "aspect-[16/10]" : "aspect-[4/3]"}
           `}
         >
-          <Image
-            src={item.imageSrc}
+          <WordPressImage
+            image={{
+              src: item.imageSrc,
+              alt: item.imageAlt ?? item.title,
+            }}
             alt={item.imageAlt ?? item.title}
             fill
             className="
