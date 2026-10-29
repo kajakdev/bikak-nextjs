@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Saira_Semi_Condensed } from "next/font/google";
+import { CookieConsentProvider } from "@/components/CookieConsentProvider";
 import "./globals.css";
 
 const saira = Saira_Semi_Condensed({
@@ -29,7 +30,9 @@ export default function RootLayout({
       className={`${saira.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        {children}
+        <CookieConsentProvider>
+          {children}
+        </CookieConsentProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 
 const partners = [
   {
@@ -78,6 +79,7 @@ export function Footer() {
               >
                 Adatvédelmi nyilatkozat
               </Link>
+              <CookieSettingsButton />
             </div>
           </div>
 

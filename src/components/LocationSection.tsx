@@ -1,3 +1,5 @@
+import { ConsentEmbed } from "./ConsentEmbed";
+
 type LocationSectionProps = {
   title: string;
   address: string;
@@ -92,13 +94,11 @@ export function LocationSection({
 
             {/* GOOGLE MAP */}
             <div className="relative min-h-[420px] lg:min-h-[640px]">
-              <iframe
+              <ConsentEmbed
+                service="googleMaps"
+                title="Pesterzsébet Jégcsarnok"
                 src={mapEmbedUrl}
-                title={`${title} térkép`}
-                className="absolute inset-0 h-full w-full border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
+                height={400}
               />
             </div>
 

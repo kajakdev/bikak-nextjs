@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/Button";
+import { ConsentEmbed } from "./ConsentEmbed";
 
 type VisionSocialSectionProps = {
   visionTitle: string;
@@ -119,18 +120,13 @@ export function VisionSocialSection({
               <div className="overflow-hidden rounded-[24px] bg-white p-4">
                 {/* Facebook embed */}
                 <div className="flex w-full justify-center overflow-hidden bg-neutral-100">
-                  <iframe
+                  <ConsentEmbed
+                    service="facebook"
                     title="Szigeti Bikák Facebook"
-                    src={facebookEmbedUrl.toString()}
-                    width="340"
-                    height="500"
-                    className="block max-w-full border-0"
-                    style={{
-                      overflow: "hidden",
-                    }}
-                    data-show_posts="true"
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+                      facebookHref
+                    )}&tabs=timeline&width=340&height=500&adapt_container_width=true`}
+                    height={500}
                   />
                 </div>
 
